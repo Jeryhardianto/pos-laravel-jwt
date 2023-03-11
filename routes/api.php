@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
     // Authentication
     Route::group(['middleware' => 'api','prefix' => 'v1'], function ($router) {
         Route::post('auth/register', RegisterController::class)->name('register');
-        // Route::post('auth/login', [LoginController::class]);
+        Route::post('auth/login', LoginController::class)->name('login');
         // Route::post('auth/logout', [RegisterController::class]);
         // Route::post('auth/refresh', 'AuthController@refresh');
     
