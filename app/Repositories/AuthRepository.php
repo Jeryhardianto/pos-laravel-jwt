@@ -25,6 +25,7 @@ class AuthRepository implements AuthInterface
 
         return response()->json([
             'success' => true,
+            'message' => 'Login successful',
             'user' => auth()->guard('api')->user(),
             'token' => $token
         ], 200);
@@ -52,7 +53,7 @@ class AuthRepository implements AuthInterface
                     'token' => $token,
                     'type' => 'bearer',
                 ]
-            ]);
+            ], 201);
         }
 
         //return JSON process insert failed 

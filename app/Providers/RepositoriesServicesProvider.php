@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Interfaces\AuthInterface;
 use App\Repositories\AuthRepository;
+use App\Interfaces\CetagoryInterface;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\CetagoryRepository;
 
 class RepositoriesServicesProvider extends ServiceProvider
 {
@@ -15,11 +17,11 @@ class RepositoriesServicesProvider extends ServiceProvider
      */
     public function register()
     {
-        //
-        $this->app->bind(
-            AuthInterface::class,
-            AuthRepository::class
-        );
+        // Auth
+        $this->app->bind(AuthInterface::class,AuthRepository::class);    
+        // Cetagory
+        $this->app->bind(CetagoryInterface::class,CetagoryRepository::class);
+  
     }
 
     /**
