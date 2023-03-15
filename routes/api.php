@@ -34,8 +34,8 @@ use App\Http\Controllers\Api\RegisterController;
     // Authentication
     Route::group(['middleware' => 'api','prefix' => 'v1'], function ($router) {
         Route::get('cetagory', [CetagoryController::class, 'index'])->name('cetagory.index');
+        Route::post('cetagory', [CetagoryController::class, 'store'])->name('cetagory.store');
         // Route::post('auth/login', LoginController::class)->name('login');
-    
     });
 
 

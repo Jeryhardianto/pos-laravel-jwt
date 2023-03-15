@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CetagoryRequest;
 use App\Interfaces\CetagoryInterface;
 
 class CetagoryRepository implements CetagoryInterface
@@ -13,15 +14,7 @@ class CetagoryRepository implements CetagoryInterface
         try {
             $perPage = $request->get('per_page', 10);
             $categories = Category::paginate($perPage);
-            // When data cetagories is null
-            if(!$categories['data'])
-            {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'List All Categories Not Found'
-                ], 404);
-            }
-    
+        
             return response()->json([
                 'success' => true,
                 'message' => 'List All Categories',
@@ -36,35 +29,21 @@ class CetagoryRepository implements CetagoryInterface
     }
   
 
-    // public function register(RegisterRequest $request)
-    // {
-    //      //create user
-    //      $user = User::create([
-    //         'name'      => $request->name,
-    //         'email'     => $request->email,
-    //         'password'  => bcrypt($request->password),
-    //         'role' => $request->role
-    //     ]);
+    public function store(CetagoryRequest $request)
+    {
+         //create cetagory
+         $Category = Category::create([
+            'name'      => $request->name
+        ]);
 
-    //     //return response JSON user is created
-    //     $token = Auth::login($user);
-    //     if($user) {
-    //         return response()->json([
-    //             'success' => true,
-    //             'message' => 'User created successfully',
-    //             'user' => $user,
-    //             'authorization' => [
-    //                 'token' => $token,
-    //                 'type' => 'bearer',
-    //             ]
-    //         ]);
-    //     }
-
-    //     //return JSON process insert failed 
-    //     return response()->json([
-    //         'success' => false,
-    //     ], 409);
-    // }
+        if($Category) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Category created successfully',
+                'data' => $Category
+            ], 200);
+        }
+    }
 }
 
 ?>
