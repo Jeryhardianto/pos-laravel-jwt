@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CetagoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\RegisterController;
 
 /*
@@ -26,7 +27,7 @@ use App\Http\Controllers\Api\RegisterController;
     Route::group(['middleware' => 'api','prefix' => 'v1'], function ($router) {
         Route::post('auth/register', RegisterController::class)->name('register');
         Route::post('auth/login', LoginController::class)->name('login');
-        // Route::post('auth/logout', [RegisterController::class]);
+        Route::post('auth/logout', LogoutController::class)->name('logout');
         // Route::post('auth/refresh', 'AuthController@refresh');
     
     });   
@@ -34,8 +35,9 @@ use App\Http\Controllers\Api\RegisterController;
     // Authentication
     Route::group(['middleware' => 'api','prefix' => 'v1'], function ($router) {
         Route::get('cetagory', [CetagoryController::class, 'index'])->name('cetagory.index');
+        Route::get('cetagory/{id}', [CetagoryController::class, 'getCetagoryById'])->name('cetagory.getCetagoryById');
         Route::post('cetagory', [CetagoryController::class, 'store'])->name('cetagory.store');
-        // Route::post('auth/login', LoginController::class)->name('login');
+        
     });
 
 

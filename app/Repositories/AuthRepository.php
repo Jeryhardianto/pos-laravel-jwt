@@ -1,11 +1,13 @@
 <?php
 namespace App\Repositories;
 
-use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use App\Interfaces\AuthInterface;
+use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\RegisterRequest;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthRepository implements AuthInterface
 {
@@ -60,6 +62,18 @@ class AuthRepository implements AuthInterface
         return response()->json([
             'success' => false,
         ], 409);
+    }
+    
+    public function logout(Request $request)
+    {
+        $removeToken = JWTAuth::invalidate(JWTAuth::getToken());
+        if($removeToken) {
+            //return response JSON
+            return response()->json([
+                'success' => true,
+                'message' => 'Logout succes!',  
+            ], 200);
+        }
     }
 }
 

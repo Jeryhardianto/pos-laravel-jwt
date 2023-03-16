@@ -17,18 +17,33 @@ class CetagoryRepository implements CetagoryInterface
         
             return response()->json([
                 'success' => true,
-                'message' => 'List All Categories',
+                'message' => 'Lists All Categories',
                 'data' => $categories,
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
-                'message' => $th
+                'message' => 'List All Not Found'
             ], 500);
         }
     }
-  
-
+    public function getListCetagoriesById($id)
+    {
+        try {
+            $categories = Category::find($id);
+        
+            return response()->json([
+                'success' => true,
+                'message' => 'List Cetagory',
+                'data' => $categories,
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => 'List Not Found'
+            ], 500);
+        }
+    }
     public function store(CetagoryRequest $request)
     {
          //create cetagory

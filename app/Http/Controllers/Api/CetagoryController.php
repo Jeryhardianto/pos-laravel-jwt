@@ -21,6 +21,11 @@ class CetagoryController extends Controller
     {
         return $this->categoryInterface->getListCetagories($request);
     }
+
+    public function getCetagoryById($id)
+    {
+        return $this->categoryInterface->getListCetagoriesById($id);
+    }
     
     public function store(CetagoryRequest $request)
     {
