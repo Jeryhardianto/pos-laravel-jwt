@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Auth;
 
-use Illuminate\Http\Request;
+
 use App\Interfaces\AuthInterface;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
 
-class RegisterController extends Controller
+class LogoutController extends Controller
 {
 
     protected $authInterface;
 
     public function __construct(AuthInterface $authInterface)
     { 
+        $this->middleware('auth:api');
         $this->authInterface = $authInterface;
     }
     /**
@@ -22,8 +22,8 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(RegisterRequest $request)
+    public function __invoke()
     {
-       return $this->authInterface->register($request);
+       return $this->authInterface->logout();
     }
 }

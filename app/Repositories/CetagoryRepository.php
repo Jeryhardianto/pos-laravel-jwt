@@ -9,8 +9,10 @@ use App\Interfaces\CetagoryInterface;
 
 class CetagoryRepository implements CetagoryInterface
 {
+  
     public function getListCetagories($request)
     {
+        
         try {
             $perPage = $request->get('per_page', 10);
             $categories = Category::paginate($perPage);
@@ -56,6 +58,21 @@ class CetagoryRepository implements CetagoryInterface
                 'success' => true,
                 'message' => 'Category created successfully',
                 'data' => $Category
+            ], 200);
+        }
+    }
+
+    public function update(CetagoryRequest $request, $id)
+    {
+        $cetagory = Category::find($id);
+        $cetagory->name = $request->name;
+        $cetagory->updated_at = now(); 
+        $cetagory->save();
+        if($cetagory) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Category updated successfully',
+                'data' => $cetagory
             ], 200);
         }
     }

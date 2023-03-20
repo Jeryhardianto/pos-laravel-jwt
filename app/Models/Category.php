@@ -15,8 +15,15 @@ class Category extends Model
         'name'
     ];
 
+    // Mengubah format tanggal "2023-02-22T17:30:38.000000Z" ke "2023-02-22 17:02:40",
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:m:s',
+        'updated_at' => 'datetime:Y-m-d H:m:s'
+    ];
+
     // public function products()
     // {
     //     return $this->hasMany(Product::class);
     // }
+    
 }

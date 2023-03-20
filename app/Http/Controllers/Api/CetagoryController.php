@@ -30,6 +30,10 @@ class CetagoryController extends Controller
     public function store(CetagoryRequest $request)
     {
         return $this->categoryInterface->store($request);
+    }
 
+    public function update(CetagoryRequest $request, $id)
+    {
+        return $this->categoryInterface->update($request, $id);
     }
 }

@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Auth;
 
 use Illuminate\Http\Request;
 use App\Interfaces\AuthInterface;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
 
-class LoginController extends Controller
+class RefreshTokenController extends Controller
 {
     protected $authInterface;
 
     public function __construct(AuthInterface $authInterface)
     { 
+        $this->middleware('auth:api');
         $this->authInterface = $authInterface;
     }
     /**
@@ -21,8 +21,8 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(LoginRequest $request)
+    public function __invoke(Request $request)
     {
-        return $this->authInterface->login($request);
+        return $this->authInterface->refreshToken($request);
     }
 }

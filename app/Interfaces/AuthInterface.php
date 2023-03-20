@@ -9,7 +9,9 @@ Interface AuthInterface
 {
     public function login(LoginRequest $request);
     public function register(RegisterRequest $request);
-    public function logout(Request $request);
+    public function logout();
+    public function me();
+    public function refreshToken(Request $request);
 }
 
 ?>
