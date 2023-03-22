@@ -25,7 +25,7 @@ class CetagoryRepository implements CetagoryInterface
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
-                'message' => 'List All Not Found'
+                'message' => $th
             ], 500);
         }
     }

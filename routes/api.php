@@ -4,12 +4,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // Auth Controller
 use App\Http\Controllers\Api\Auth\MeController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CetagoryController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
-use App\Http\Controllers\Api\Auth\RefreshTokenController;
-use App\Http\Controllers\Api\Auth\RegisterController;
 // Cetagory Controller
-use App\Http\Controllers\Api\CetagoryController;
+use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\Auth\RefreshTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,6 @@ use App\Http\Controllers\Api\CetagoryController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
     // API v1
     // Authentication
     Route::group(['prefix' => 'v1'], function ($router) {
@@ -38,10 +38,15 @@ use App\Http\Controllers\Api\CetagoryController;
 
     // Cetagory
     Route::group(['prefix' => 'v1'], function ($router) {
-        Route::get('cetagory', [CetagoryController::class, 'index'])->name('cetagory.index');
+        Route::get('cetagory', [CetagoryController::class, 'index'] )->name('cetagory.index');
         Route::get('cetagory/{id}', [CetagoryController::class, 'getCetagoryById'])->name('cetagory.getCetagoryById');
         Route::post('cetagory', [CetagoryController::class, 'store'])->name('cetagory.store');
         Route::put('cetagory/{id}', [CetagoryController::class, 'update'])->name('cetagory.update');
+    }); 
+    // Products
+    Route::group(['prefix' => 'v1'], function ($router) {
+        Route::apiResource('product', ProductController::class,['as'=> 'api']);
     });
+
 
 
